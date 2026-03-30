@@ -7,21 +7,16 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://assistant-frontend-git-main-sanjus-projects-ac449c3d.vercel.app"
+  "https://assistant-frontend-ashen.vercel.app",
+  "https://assistant-frontend-git-main-sanjus-projects-ac449c3d.vercel.app",
+  "https://assistant-frontend-ifnp42353-sanjus-projects-ac449c3d.vercel.app"
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
-      }
-    },
+    origin: allowedOrigins,
     credentials: true,
   })
 );
