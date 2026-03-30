@@ -7,14 +7,26 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-// middleware
-app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://assistant-frontend-git-main-sanjus-projects-ac449c3d.vercel.app"
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     credentials: true,
   })
 );
+// middleware
+app.use(express.json());
 app.use(cookieParser());
 
 // routes
